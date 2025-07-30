@@ -53,5 +53,16 @@ select * from employeetable where first_name = "DINESH";
 select * from employeetable where first_name = "DINESH" or first_name = "ROY";
 -- Get employee details from employee table whose employee name are not “Dinesh” and “Roy”
 select * from employeetable where not first_name = "DINESH" and not first_name = "ROY";
+-- Get all the details of the employee whose salary is greater than 60000.
+select * from employeetable where salary > 60000;
+-- Get all the details of the employee whose salary is between 50000 to 70000
+select * from employeetable where salary >= 50000 and salary <=70000;
+--  Get first name and last name as single column separated by space of the employee whose salary is less than 50000
+select concat(first_name,"_",last_name) from employeetable where salary < 50000;
+-- Get first name and salary, arrange it by salary in ascending order.
+select  first_name,salary from employeetable order by salary asc;
+-- Get all the details of the employee whose salary is between 50000 to 70000 and arrange them by their first name as ascending order.
+select * from employeetable where salary >=50000 and salary <=70000 order by first_name asc;
+
 
 
