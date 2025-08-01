@@ -63,6 +63,31 @@ select concat(first_name,"_",last_name) from employeetable where salary < 50000;
 select  first_name,salary from employeetable order by salary asc;
 -- Get all the details of the employee whose salary is between 50000 to 70000 and arrange them by their first name as ascending order.
 select * from employeetable where salary >=50000 and salary <=70000 order by first_name asc;
+create table incentives(emp_id int,incentive_date date,incentive_amount int);
+insert into incentives values(1,"2016-02-01",5000);
+insert into incentives values(2,"2016-02-01",3000),
+(3,"2017-02-01",4000),
+(1,"2017-01-17",4500),
+(2,"2017-01-01",3500);
+select * from incentives;
+-- Get the employee name ,add the salary and total incentive amount from incentive table use join with condition
+select e.first_name,sum(e.salary+i.incentive_amount) from employeetable e join incentives i where e.emp_id = i.emp_id group by e.first_name,e.salary;
+--  Select first_name, incentive amount from employee and incentives table for those employees who have incentives
+ select e.first_name,i.incentive_amount from employee_details e join Incentive i where e.employee_id = i.employee_ref_id group by e.first_name,i.incentive_amount;
+ -- Select first_name, incentive amount from employee and incentives table for those employees who have incentives and incentive amount greater than 3000
+ select e.first_name,i.incentive_amount from employee_details e join Incentive i where e.employee_id = i.employee_ref_id and salary>3000 group by e.first_name,i.incentive_amount;
+ -- Select first_name, incentive amount from employee and incentives table for all employes even if they didn't get incentives
+ select e.first_name,i.incentive_amount from employee_details e join Incentive i where not e.employee_id = i.employee_ref_id group by e.first_name,i.incentive_amount;
+ -- Select first_name, incentive amount from employee and incentives table for all employees even if they didn't get incentives and set incentive amount as 0 for those employees who didn't get incentives.
+ select e.first_name,ifnull((i.incentive_amount),0)  from employee_details e left join Incentive i on e.employee_id=i.employee_ref_id group by e.first_name,i.incentive_amount;
+-- Select first_name, incentive amount from employee and incentives table for all employees who got incentives using left join
+ select e.first_name,(i.incentive_amount) from employee_details e left join Incentive i on e.employee_id=i.employee_ref_id group by e.first_name,i.incentive_amount;
+--  Select max incentive with respect to employee from employee and incentives table using sub query
+select e.first_name,max(i.incentive_amount) from employee_details e join Incentive i where e.employee_id=i.employee_ref_id group by e.first_name;
+
+ 
+
+
 
 
 
